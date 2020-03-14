@@ -36,6 +36,5 @@ workflows:
             - optimize:
                 requires:
                     - build
-                jobs:
                     - optimize1
                     - optimize2

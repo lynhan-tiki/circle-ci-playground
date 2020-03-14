@@ -7,6 +7,13 @@ jobs:
             - checkout
             - run: yarn
             - run: yarn test
+    build1:
+        docker:
+            - image: circleci/node:12.14.1
+        steps:
+            - checkout
+            - run: yarn
+            - run: yarn test
     optimize:
         docker:
             - image: circleci/node:12.14.1
@@ -36,5 +43,10 @@ workflows:
             - optimize:
                 requires:
                     - build
+            - optimize1:
+                requires:
+                    - build
+            - build2:
+                requires:
+                    - optimize
                     - optimize1
-                    - optimize2

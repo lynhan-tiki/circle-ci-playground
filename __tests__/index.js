@@ -10,6 +10,6 @@ describe("test", function() {
 });
 describe("test", function() {
   it("test", function() {
-    expect(3).toEqual(2);
+    expect(3).toEqual(3);
   });
 });

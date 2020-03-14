@@ -1,0 +1,23 @@
+{
+  "name": "circle-ci-playground",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lynhan94/circle-ci-playground.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lynhan94/circle-ci-playground/issues"
+  },
+  "homepage": "https://github.com/lynhan94/circle-ci-playground#readme",
+  "dependencies": {
+    "jest": "^25.1.0"
+  }
+}

@@ -40,7 +40,7 @@ workflows:
     tbox_test:
         jobs:
             - build
-            - build2
+            - build1
             - optimize:
                 requires:
                     - build

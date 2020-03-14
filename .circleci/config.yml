@@ -7,3 +7,10 @@ jobs:
             - checkout
             - run: yarn
             - run: yarn test
+
+workflows:
+    version: 2.1
+
+    run_test:
+        jobs:
+            - build

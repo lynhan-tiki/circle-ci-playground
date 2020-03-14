@@ -1,24 +1,8 @@
 version: 2.1
 jobs:
-<<<<<<< HEAD
     build:
         docker:
             - imgage: circleci/node:12.14.1
         steps:
             - run: yarn
             - run: yarn test
-=======
-  build-and-test:
-    executor:
-      name: node/default
-    steps:
-      - checkout
-      - node/with-cache:
-          steps:
-            - run: npm install
-            - run: npm test
-workflows:
-    build-and-test:
-      jobs:
-        - build-and-test
->>>>>>> 3dc81b585480d90d0809f0e94fd40d4863aaa4b5

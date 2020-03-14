@@ -21,6 +21,6 @@ workflows:
     tbox_test:
         jobs:
             - build
-            - optimize
+            - optimize:
                 requires:
                     - build

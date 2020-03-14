@@ -7,7 +7,7 @@ jobs:
             - checkout
             - run: yarn
             - run: yarn test
-    run:
+    optimize:
         docker:
             - image: circleci/node:12.14.1
         step:
@@ -20,4 +20,4 @@ workflows:
     tbox_test:
         jobs:
             - build
-            - run
+            - optimize

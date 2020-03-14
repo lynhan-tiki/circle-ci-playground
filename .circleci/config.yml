@@ -7,10 +7,19 @@ jobs:
             - checkout
             - run: yarn
             - run: yarn test
+    run:
+        docker:
+            - image: circleci/node:12.14.1
+        step:
+            - run: node index.js
+
 
 workflows:
     version: 2.1
 
-    run_test:
+    tbox_test:
         jobs:
             - build
+    tbox_run:
+        jobs:
+            - run

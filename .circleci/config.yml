@@ -44,3 +44,4 @@ workflows:
             - optimize:
                 requires:
                     - build
+                    - build1

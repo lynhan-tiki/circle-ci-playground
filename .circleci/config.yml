@@ -13,6 +13,18 @@ jobs:
         steps:
             - checkout
             - run: node index.js
+    optimize1:
+        docker:
+            - image: circleci/node:12.14.1
+        steps:
+            - checkout
+            - run: node index.js
+    optimize2:
+        docker:
+            - image: circleci/node:12.14.1
+        steps:
+            - checkout
+            - run: node index.js
 
 
 workflows:
@@ -24,3 +36,6 @@ workflows:
             - optimize:
                 requires:
                     - build
+                jobs:
+                    - optimize1
+                    - optimize2

@@ -20,6 +20,4 @@ workflows:
     tbox_test:
         jobs:
             - build
-    tbox_run:
-        jobs:
             - run

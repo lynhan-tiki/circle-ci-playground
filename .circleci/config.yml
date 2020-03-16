@@ -33,8 +33,7 @@ jobs:
           name: "Hello World"
           command: |
               echo "Start job build"
-      - custom_build:
-          app_name: "BUILD_APP_NAME"
+      - custom_build
 
   test:
     docker:

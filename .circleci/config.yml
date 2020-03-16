@@ -4,6 +4,10 @@ commands:
   custom_build:
     steps:
       - run:
+          name: "Hello World"
+          command: |
+              echo "Start job build"
+      - run:
           name: "Start command build"
           command: |
             echo "Custom test run"
@@ -15,6 +19,10 @@ commands:
       app_name:
         type: string
     steps:
+      - run:
+          name: "Hello World"
+          command: |
+              echo "Start job test"
       - run:
           name: "Start command test"
           command: |
@@ -29,10 +37,6 @@ jobs:
         - image: circleci/node:12.14.1
     steps:
       - checkout
-      - run:
-          name: "Hello World"
-          command: |
-              echo "Start job build"
       - custom_build
 
   test:
@@ -40,13 +44,10 @@ jobs:
         - image: circleci/node:12.14.1
     steps:
       - checkout
-      - run:
-          name: Code Has Arrived
-          command: |
-            ls -al
-            echo 'Start Job test'
       - custom_test:
           app_name: "TEST_APP_NAME"
+      - custom_test:
+          app_name: "TEST_APP_NAME2"
 
 workflows:
  version: 2

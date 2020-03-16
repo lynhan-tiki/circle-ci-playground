@@ -27,7 +27,7 @@ commands:
           name: "Start command test"
           command: |
             echo "Custom test run"
-            yarn test << parameters.app_nam >>
+            yarn test << parameters.app_name >>
             echo "Custom comment << parameters.app_name >>"
 
 

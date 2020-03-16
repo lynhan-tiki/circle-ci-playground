@@ -1,13 +1,6 @@
 version: 2.1
 
 commands:
-  master_cmd:
-    steps:
-      - run:
-          name: "master cmd"
-          command: |
-              echo "Hello can nest cmd command"
-
   custom_build:
     steps:
       - master_cmd
@@ -22,6 +15,13 @@ commands:
             echo "Custom test run"
             yarn cache clean -f
             yarn
+
+  master_cmd:
+    steps:
+      - run:
+          name: "master cmd"
+          command: |
+              echo "Hello can nest cmd command"
 
   custom_test:
     parameters:

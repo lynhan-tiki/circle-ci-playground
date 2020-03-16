@@ -1,8 +1,13 @@
 version: 2.1
 
 commands:
+  master_cmd:
+    steps:
+      - run: echo "master cmd"
+
   custom_build:
     steps:
+      - master_cmd
       - run:
           name: "Hello World"
           command: |

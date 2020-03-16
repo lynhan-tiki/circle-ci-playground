@@ -1,9 +1,8 @@
 version: 2.1
 
 commands:
-  build:
+  custom_build:
     steps:
-      - checkout
       - run:
           name: "Start command build"
           command: |
@@ -11,12 +10,11 @@ commands:
             yarn cache clean -f
             yarn
 
-  test:
+  custom_test:
     parameters:
       app_name:
         type: string
     steps:
-      - checkout
       - run:
           name: "Start command test"
           command: |
@@ -35,7 +33,7 @@ jobs:
           name: "Hello World"
           command: |
               echo "Start job build"
-      - build:
+      - custom_build:
           app_name: "BUILD_APP_NAME"
 
   test:
@@ -48,7 +46,7 @@ jobs:
           command: |
             ls -al
             echo 'Start Job test'
-      - test:
+      - custom_test:
           app_name: "TEST_APP_NAME"
 
 workflows:

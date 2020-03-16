@@ -3,7 +3,10 @@ version: 2.1
 commands:
   master_cmd:
     steps:
-      - run: echo "master cmd"
+      - run:
+          name: "master cmd"
+          command: |
+              echo "Hello can nest cmd command"
 
   custom_build:
     steps:
@@ -12,6 +15,7 @@ commands:
           name: "Hello World"
           command: |
               echo "Start job build"
+      - master_cmd
       - run:
           name: "Start command build"
           command: |

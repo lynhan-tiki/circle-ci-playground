@@ -7,8 +7,8 @@ commands:
       - run:
           name: "Hello World"
           command: |
-              echo "Start job build"
-      - master_cmd
+            echo "Start job build"
+      - build_cmd
       - run:
           name: "Start command build"
           command: |
@@ -16,12 +16,21 @@ commands:
             yarn cache clean -f
             yarn
 
+  build_cmd:
+    steps:
+      - run:
+          name: "Run build cmd"
+          command: "./script/build.sh"
+      - run:
+          name: "hello"
+          command: "this should run after"
+
   master_cmd:
     steps:
       - run:
           name: "master cmd"
           command: |
-              echo "Hello can nest cmd command"
+            echo "Hello can nest cmd command"
 
   custom_test:
     parameters:
@@ -31,7 +40,7 @@ commands:
       - run:
           name: "Hello World"
           command: |
-              echo "Start job test"
+            echo "Start job test"
       - run:
           name: "Start command test"
           command: |
@@ -39,18 +48,17 @@ commands:
             yarn test << parameters.app_name >>
             echo "Custom comment << parameters.app_name >>"
 
-
 jobs:
   build:
     docker:
-        - image: circleci/node:12.14.1
+      - image: circleci/node:12.14.1
     steps:
       - checkout
       - custom_build
 
   test:
     docker:
-        - image: circleci/node:12.14.1
+      - image: circleci/node:12.14.1
     steps:
       - checkout
       - custom_test:
@@ -59,10 +67,10 @@ jobs:
           app_name: "TEST_APP_NAME2"
 
 workflows:
- version: 2
- Example_Workflow:
-   jobs:
-     - test
-     - build:
-         requires:
-           - test
+  version: 2
+  Example_Workflow:
+    jobs:
+      - test
+      - build:
+          requires:
+            - test

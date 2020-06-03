@@ -71,6 +71,5 @@ workflows:
             branches:
               only:
                 - test
-                - master
           requires:
             - test

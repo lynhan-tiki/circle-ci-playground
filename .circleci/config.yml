@@ -18,12 +18,7 @@ commands:
 
   build_cmd:
     steps:
-      - run:
-          name: "Run build cmd"
-          command: "./script/build.sh"
-      - run:
-          name: "hello"
-          command: "this should run after"
+      - run: ./scripts/build.sh
 
   master_cmd:
     steps:

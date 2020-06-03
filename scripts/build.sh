@@ -1,3 +1,3 @@
 echo "run script build"
-echo $circleci
+circleci
 echo "run second echo"

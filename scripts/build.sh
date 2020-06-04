@@ -5,6 +5,7 @@ BRANCH="develop"
 APP=$1
 
 export BUILD_STEP=""
+echo "BUILD_STEP ${BUILD_STEP}"
 
 function getApp() {
     APP="mweb"

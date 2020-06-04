@@ -7,6 +7,7 @@ commands:
 
   custom_build:
     steps:
+      - master_cmd
       - run:
           name: "Hello World"
           command: |
@@ -32,8 +33,10 @@ workflows:
   version: 2
   Example_Workflow:
     jobs:
-      - test
+      - test:
+          context: build
       - build:
+          context: build
           filters:
             branches:
               only:

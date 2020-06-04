@@ -1,65 +1,32 @@
 version: 2.1
 
 commands:
+  build_cmd:
+    steps:
+      - run: ./scripts/build.sh mweb
+
   custom_build:
     steps:
-      - master_cmd
       - run:
           name: "Hello World"
           command: |
             echo "Start job build"
             echo "${BUILD_STEP}"
             echo ${BUILD_STEP}
-      - run:
-          name: "Start command build"
-          command: |
-            echo "Custom test run"
-            yarn cache clean -f
-            yarn
-  build_cmd:
-    steps:
-      - run: ./scripts/build.sh mweb
-
-  master_cmd:
-    steps:
-      - run:
-          name: "master cmd"
-          command: |
-            echo "Hello can nest cmd command"
-  custom_test:
-    parameters:
-      app_name:
-        type: string
-    steps:
-      - run:
-          name: "Hello World"
-          command: |
-            echo "Start job test"
-            echo "get ENV ${BUILD_STEP}"
-      - run:
-          name: "Start command test"
-          command: |
-            echo "Custom test run"
-            yarn test << parameters.app_name >>
-            echo "Custom comment << parameters.app_name >>"
 jobs:
-  build:
-    docker:
-      - image: circleci/node:12.14.1
-    steps:
-      - checkout
-      - custom_build
-
   test:
     docker:
       - image: circleci/node:12.14.1
     steps:
       - checkout
       - build_cmd
-      - custom_test:
-          app_name: "TEST_APP_NAME"
-      - custom_test:
-          app_name: "TEST_APP_NAME2"
+
+  build:
+    docker:
+      - image: circleci/node:12.14.1
+    steps:
+      - checkout
+      - custom_build
 
 workflows:
   version: 2

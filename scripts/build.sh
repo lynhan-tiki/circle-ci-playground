@@ -12,7 +12,7 @@ function buildByApp() {
   case $1 in
   "mweb")
     echo "trigger build mweb"
-    #circleci-agent step halt
+    circleci-agent step halt
     ;;
   "miniapp")
     echo "trigger build miniapp"

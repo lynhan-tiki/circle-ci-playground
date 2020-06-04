@@ -2,22 +2,22 @@
 
 set -e
 BRANCH="develop"
-APP=$1
 
-function getApp() {
-    APP = $(git show-branch --no-name HEAD)
+function isBuild() {
+    echo $(git show-branch --no-name HEAD) | grep $1
 }
 
 function buildByApp() {
-  case $1 in
-  "mweb")
-    echo "trigger build mweb"
-    echo "STEP_BUILD=steop" >> $BASH_ENV
-    BUILD_STEP="stop"
-    circleci-agent step halt
-    ;;
-  "miniapp")
+  echo $(isBuild $1)
+  case $APP in
+  "BUILD_MINIAPP")
     echo "trigger build miniapp"
+    ;;
+  "BUILD_MWEB")
+    echo "trigger build mweb"
+    ;;
+  "BUILD_ALL")
+    echo "trigger build all"
     ;;
   *)
       exit 1
@@ -25,6 +25,4 @@ function buildByApp() {
     ;;
   esac
 }
-getApp
-echo "app is s${APP}"
-buildByApp $APP
+buildByApp $1

@@ -7,7 +7,6 @@ commands:
 
   custom_build:
     steps:
-      - master_cmd
       - run:
           name: "Hello World"
           command: |

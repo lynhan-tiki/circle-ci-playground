@@ -4,7 +4,7 @@ set -e
 BRANCH="develop"
 APP=$1
 
-export BUILD_STEP=""
+export BUILD_STEP="test build step"
 echo "BUILD_STEP ${BUILD_STEP}"
 
 function getApp() {

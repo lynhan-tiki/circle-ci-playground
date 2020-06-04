@@ -3,13 +3,9 @@
 set -e
 BRANCH="develop"
 APP=$1
-echo "BASH_ENV in temp file ${BASH_ENV}"
-echo "build step is ${BUILD_STEP}"
-export BUILD_STEP="test build step"
-echo "BUILD_STEP ${BUILD_STEP}"
 
 function getApp() {
-    APP="mweb"
+    APP = $(git show-branch --no-name HEAD)
 }
 
 function buildByApp() {
@@ -29,5 +25,6 @@ function buildByApp() {
     ;;
   esac
 }
-#getApp
+getApp
+echo "app is s${APP}"
 buildByApp $APP

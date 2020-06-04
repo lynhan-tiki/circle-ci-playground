@@ -34,10 +34,8 @@ workflows:
   version: 2
   Example_Workflow:
     jobs:
-      - test:
-          context: build
+      - test
       - build:
-          context: build
           filters:
             branches:
               only:

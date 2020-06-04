@@ -16,6 +16,7 @@ function buildByApp() {
   case $1 in
   "mweb")
     echo "trigger build mweb"
+    echo "STEP_BUILD=steop" >> $BASH_ENV
     BUILD_STEP="stop"
     circleci-agent step halt
     ;;

@@ -35,6 +35,7 @@ commands:
           name: "Hello World"
           command: |
             echo "Start job test"
+            echo "get ENV ${BUILD_STEP}"
       - run:
           name: "Start command test"
           command: |

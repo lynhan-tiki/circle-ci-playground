@@ -4,12 +4,11 @@ set -e
 BRANCH="develop"
 
 function isBuild() {
-    echo $(git show-branch --no-name HEAD) | grep $1
+    echo $(git show-branch --no-name HEAD) | head -n1 | awk '{print $1;}'
 }
 
 function buildByApp() {
-  echo $(isBuild $1)
-  case $APP in
+  case $(isBuild $1) in
   "BUILD_MINIAPP")
     echo "trigger build miniapp"
     ;;

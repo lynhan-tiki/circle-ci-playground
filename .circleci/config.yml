@@ -51,12 +51,12 @@ jobs:
     docker:
       - image: circleci/node:12.14.1
     steps:
+      - build_cmd
       - checkout
       - custom_test:
           app_name: "TEST_APP_NAME"
       - custom_test:
           app_name: "TEST_APP_NAME2"
-      - build_cmd
 
 workflows:
   version: 2

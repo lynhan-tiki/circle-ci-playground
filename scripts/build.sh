@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
+set -e
 BRANCH="develop"
 APP=$1
-set -e
+
+export BUILD_STEP=""
 
 function getApp() {
     APP="mweb"
@@ -12,7 +14,7 @@ function buildByApp() {
   case $1 in
   "mweb")
     echo "trigger build mweb"
-    export MWEB_STEP="stop"
+    BUILD_STEP="stop"
     circleci-agent step halt
     ;;
   "miniapp")

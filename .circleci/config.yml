@@ -1,48 +1,5 @@
 version: 2.1
 
-commands:
-  custom_build:
-    steps:
-      - master_cmd
-      - run:
-          name: "Hello World"
-          command: |
-            echo "Start job build"
-      - build_cmd
-      - run:
-          name: "Start command build"
-          command: |
-            echo "Custom test run"
-            yarn cache clean -f
-            yarn
-
-  build_cmd:
-    steps:
-      - run: ./scripts/build.sh
-
-  master_cmd:
-    steps:
-      - run:
-          name: "master cmd"
-          command: |
-            echo "Hello can nest cmd command"
-
-  custom_test:
-    parameters:
-      app_name:
-        type: string
-    steps:
-      - run:
-          name: "Hello World"
-          command: |
-            echo "Start job test"
-      - run:
-          name: "Start command test"
-          command: |
-            echo "Custom test run"
-            yarn test << parameters.app_name >>
-            echo "Custom comment << parameters.app_name >>"
-
 jobs:
   build:
     docker:

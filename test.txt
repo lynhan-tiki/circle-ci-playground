@@ -1,0 +1,17 @@
+code change:
+    - trigger build
+
+ENV:
+    - dev
+    - qa
+    - uat
+    - master
+Branch:
+    - dev
+    - qa
+    - uat
+    - master
+App:
+    - MiniApp
+    - MWeb
+    - ???

@@ -10,17 +10,17 @@ function isBuild() {
 function buildByApp() {
   case $(isBuild $1) in
   "BUILD_MINIAPP")
-    echo "trigger build miniapp"
+    echo "Trigger build MINIAPP"
     ;;
   "BUILD_MWEB")
-    echo "trigger build mweb"
+    echo "Trigger build MWEB"
     ;;
   "BUILD_ALL")
-    echo "trigger build all"
+    echo "Trigger build ALL"
     ;;
   *)
-      exit 1
-      echo "[ MINIAPP|MWEB ] are support"
+  echo "[ MINIAPP|MWEB|ALL ] are support"
+  circleci-agent step halt
     ;;
   esac
 }

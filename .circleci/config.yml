@@ -1,19 +1,26 @@
 version: 2.1
 
 commands:
-  build_cmd:
+  should_build:
     steps:
-      - run: ./scripts/build.sh mweb
+      - run:
+          name: "check Should build"
+          command: |
+            ./scripts/build.sh
+
+  custom_test:
+    steps:
+      - run:
+          name: "Run custom test"
+          command: |
+            echo "Running custom test"
 
   custom_build:
     steps:
       - run:
           name: "Hello World"
           command: |
-            source $BASH_ENV
-            echo "export STEP_BUILD=123" >> $BASH_ENV
-            echo "Start job build"
-            cat $BASH_ENV
+            echo "start build"
 
 jobs:
   test:
@@ -21,13 +28,14 @@ jobs:
       - image: circleci/node:12.14.1
     steps:
       - checkout
-      - build_cmd
+      - custom_test
 
   build:
     docker:
       - image: circleci/node:12.14.1
     steps:
       - checkout
+      - should_build
       - custom_build
 
 workflows:

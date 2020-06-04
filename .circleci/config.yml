@@ -8,6 +8,7 @@ commands:
           name: "Hello World"
           command: |
             echo "Start job build"
+            echo $MWEB_STEP
       - run:
           name: "Start command build"
           command: |

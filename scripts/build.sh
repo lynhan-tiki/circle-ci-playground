@@ -3,7 +3,7 @@
 set -e
 BRANCH="develop"
 APP=$1
-
+echo "BASH_ENV in temp file ${BASH_ENV}"
 echo "build step is ${BUILD_STEP}"
 export BUILD_STEP="test build step"
 echo "BUILD_STEP ${BUILD_STEP}"

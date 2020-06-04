@@ -11,7 +11,7 @@ commands:
           name: "Hello World"
           command: |
             touch $BASH_ENV
-            echo "export STEP_BUILD=123 >> $BASH_ENV"
+            echo "export STEP_BUILD=123" >> $BASH_ENV
             source $BASH_ENV
             echo "Start job build"
             cat $BASH_ENV

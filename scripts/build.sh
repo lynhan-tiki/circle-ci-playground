@@ -1,19 +1,18 @@
 #!/usr/bin/env bash
 
 set -e
-BRANCH="develop"
+APP_NAME=$1
 
 function isBuild() {
     echo $(git show-branch --no-name HEAD) | head -n1 | awk '{print $1;}'
 }
 
 function buildByApp() {
-  case $(isBuild $1) in
-  "BUILD_MINIAPP")
-    echo "Trigger build MINIAPP"
-    ;;
-  "BUILD_MWEB")
-    echo "Trigger build MWEB"
+  APP_NAME=$1
+  echo "buid first agurment ${APP_NAME}"
+  case $(isBuild) in
+  $APP_NAME)
+    echo "Trigger build ${APP_NAME}"
     ;;
   "BUILD_ALL")
     echo "Trigger build ALL"

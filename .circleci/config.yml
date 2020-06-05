@@ -1,13 +1,6 @@
 version: 2.1
 
 commands:
-  should_build:
-    steps:
-      - run:
-          name: "check Should build"
-          command: |
-            ./scripts/build.sh
-
   custom_test:
     steps:
       - run:
@@ -16,66 +9,53 @@ commands:
             echo "Running custom test"
 
   custom_build:
-    steps:
-      - run:
-          name: "Hello World"
-          command: |
-            echo "start build"
-
-jobs:
-  deploy:
+    parameters:
+      app_name:
+        type: string
+        app_name: BUILD_ALL
     docker:
       - image: circleci/node:12.14.1
-    parameters:
-      factor:
-        type: string
-        default: mobile
-      label:
-        type: string
-        default: Lighthouse Mweb Mobile
-      urls:
-        type: string
-        default: https://mweb.ticketbox.dev
     steps:
+      - checkout
+      - run: ./scripts/build.sh << parameters.app_name >>
       - run:
-          name: "Deploy app"
+          name: "Tigger build << parameters.app_name >>"
           command: |
-            echo "<< parameters.factor >>"
-            echo "<< parameters.label >>"
-            echo "<< parameters.urls >>"
+            echo "Start build << parameters.app_name >>"
+
+jobs:
   test:
     docker:
       - image: circleci/node:12.14.1
     steps:
       - checkout
+      - should_build:
+          app_name: BUILD_MINIAPP
+      - should_build:
+          app_name: BUILD_MWEB
       - custom_test
-
   build:
+    parameters:
+      app_name:
+        type: string
+        app_name: BUILD_ALL
     docker:
       - image: circleci/node:12.14.1
     steps:
       - checkout
-      - should_build
-      - custom_build
+      - should_build:
+          app_name: << parameters.app_name >>
 
 workflows:
   version: 2
-  Example_Workflow:
+  process_cicd:
     jobs:
       - test
-      - build:
-          filters:
-            branches:
-              only:
-                - test
+      - custom_build:
+          app_name: BUILD_MWEB
           requires:
             - test
-      - deploy:
-          factor: "factor1"
-          label: "label1"
-          urls: "url1"
-
-      - deploy:
-          factor: "factor2"
-          label: "label2"
-          urls: "url2"
+      - custom_build:
+          app_name: BUILD_MINIAPP
+          requires:
+            - test

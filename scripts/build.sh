@@ -1,26 +1,25 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 set -e
-APP_NAME=$1
+
+BUILD="build_$1"
 
 function isBuild() {
     echo $(git show-branch --no-name HEAD) | head -n1 | awk '{print $1;}'
 }
 
 function buildByApp() {
-  APP_NAME=$1
-  echo "buid first agurment ${APP_NAME}"
   case $(isBuild) in
-  $APP_NAME)
-    echo "YES::Trigger build ${APP_NAME}"
+  $1)
+    echo "YES::Trigger build $1"
     ;;
-  "BUILD_ALL")
-    echo "YES::Trigger build ${APP_NAME}"
+  "build_all")
+    echo "YES::Start build $1"
     ;;
   *)
-  echo "NO: Stop!"
+  echo "NOOOOOO: SAVE MY TIME, PLEASE STOP!"
   circleci-agent step halt
     ;;
   esac
 }
-buildByApp $1
+buildByApp $BUILD

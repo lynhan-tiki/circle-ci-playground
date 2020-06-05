@@ -17,8 +17,22 @@ commands:
       - run:
           name: "Should build << parameters.app_name >>"
           command: |
-            ./scripts/build.sh << parameters.app_name >>
-
+            build="build_<< parameters.app_name >>"
+            buildPattern= $(git show-branch --no-name HEAD) | head -n1 | awk '{print $1;}'
+            echo ${build}
+            echo ${buildPattern}
+            case ${buildPattern} in
+            $build)
+              echo "YES:: Trigger build ${build}"
+              ;;
+            "build_app")
+              echo "YES:: Tigger build ${build}"
+              ;;
+            *)
+              echo "No:: SAVE MY TIME, PLEASE STOP"
+              circleci-agent step halt
+              ;;
+              esac
       - run:
           name: "Tigger build << parameters.app_name >>"
           command: |
@@ -31,35 +45,19 @@ jobs:
     steps:
       - checkout
   build:
-    docker:
-      - image: circleci/node:12.14.1
     parameters:
       app_name:
         type: string
-
+    docker:
+      - image: circleci/node:12.14.1
     steps:
       - checkout
       - custom_build:
           app_name: << parameters.app_name >>
 
-  build_miniapp:
-    docker:
-      - image: circleci/node:12.14.1
-    steps:
-      - checkout
-      - custom_build:
-          app_name: BUILD_MINIAPP
-
 workflows:
   version: 2
   process_cicd:
     jobs:
-      - test
       - build:
-          app_name: BUILD_MWEB
-          requires:
-            - test
-      - build:
-          app_name: BUILD_MINIAPP
-          requires:
-            - test
+          app_name: mweb

@@ -12,9 +12,6 @@ commands:
     parameters:
       app_name:
         type: string
-        app_name: BUILD_ALL
-    docker:
-      - image: circleci/node:12.14.1
     steps:
       - checkout
       - run: ./scripts/build.sh << parameters.app_name >>
@@ -29,33 +26,36 @@ jobs:
       - image: circleci/node:12.14.1
     steps:
       - checkout
-      - should_build:
-          app_name: BUILD_MINIAPP
-      - should_build:
-          app_name: BUILD_MWEB
-      - custom_test
   build:
+    docker:
+      - image: circleci/node:12.14.1
     parameters:
       app_name:
         type: string
-        app_name: BUILD_ALL
+
+    steps:
+      - checkout
+      - custom_build:
+          app_name: << parameters.app_name >>
+
+  build_miniapp:
     docker:
       - image: circleci/node:12.14.1
     steps:
       - checkout
-      - should_build:
-          app_name: << parameters.app_name >>
+      - custom_build:
+          app_name: BUILD_MINIAPP
 
 workflows:
   version: 2
   process_cicd:
     jobs:
       - test
-      - custom_build:
+      - build:
           app_name: BUILD_MWEB
           requires:
             - test
-      - custom_build:
+      - build:
           app_name: BUILD_MINIAPP
           requires:
             - test

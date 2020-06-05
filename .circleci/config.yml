@@ -14,7 +14,11 @@ commands:
         type: string
     steps:
       - checkout
-      - run: ./scripts/build.sh << parameters.app_name >>
+      - run:
+          name: "Should build << parameters.app_name >>"
+          command: |
+            ./scripts/build.sh << parameters.app_name >>
+
       - run:
           name: "Tigger build << parameters.app_name >>"
           command: |

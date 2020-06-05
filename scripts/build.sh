@@ -12,13 +12,13 @@ function buildByApp() {
   echo "buid first agurment ${APP_NAME}"
   case $(isBuild) in
   $APP_NAME)
-    echo "Trigger build ${APP_NAME}"
+    echo "YES::Trigger build ${APP_NAME}"
     ;;
   "BUILD_ALL")
-    echo "Trigger build ALL"
+    echo "YES::Trigger build ${APP_NAME}"
     ;;
   *)
-  echo "[ MINIAPP|MWEB|ALL ] are support"
+  echo "NO: Stop!"
   circleci-agent step halt
     ;;
   esac

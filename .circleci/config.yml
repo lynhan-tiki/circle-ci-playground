@@ -23,6 +23,26 @@ commands:
             echo "start build"
 
 jobs:
+  deploy:
+    docker:
+      - image: circleci/node:12.14.1
+    parameters:
+      factor:
+        type: string
+        default: mobile
+      label:
+        type: string
+        default: Lighthouse Mweb Mobile
+      urls:
+        type: string
+        default: https://mweb.ticketbox.dev
+    steps:
+      - run:
+          name: "Deploy app"
+          command: |
+            echo "<< parameters.factor >>"
+            echo "<< parameters.label >>"
+            echo "<< parameters.urls >>"
   test:
     docker:
       - image: circleci/node:12.14.1
@@ -50,3 +70,12 @@ workflows:
                 - test
           requires:
             - test
+      - deploy:
+          factor: "factor1"
+          label: "label1"
+          urls: "url1"
+
+      - deploy:
+          factor: "factor2"
+          label: "label2"
+          urls: "url2"
